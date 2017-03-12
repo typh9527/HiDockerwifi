@@ -9,7 +9,7 @@ config.read('db.ini')
 ftphost = config.get("FTP","host")
 registry_host = config.get("Registry","host")
 
-def pullldc(imname):
+def pulldc(imname):
     """
     从私有库拉去镜像
     """
