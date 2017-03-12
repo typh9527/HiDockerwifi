@@ -7,6 +7,21 @@ import configparser
 config = configparser.ConfigParser()
 config.read('db.ini')
 ftphost = config.get("FTP","host")
+registry_host = config.get("Registry","host")
+
+def pullldc(imname):
+    """
+    从私有库拉去镜像
+    """
+    full_imname = registry_host + '/' + imname
+    cmd = "docker pull " + full_imname
+    (status, output) = subprocess.getstatusoutput(cmd)
+    if status == 0:
+        print("pull from registry success!")
+        return True
+    else:
+        print("pull from registry failed!")
+        return False
 
 def checkdc(equip):
     """
