@@ -25,7 +25,7 @@ if __name__ == "__main__":
     #:配置host和port
     HOST,PORT = "192.168.12.1",22223
     #:构建发送消息
-    msg1 = [{'cmd':r'/usr/bin/top -b','equip':"bx", 'log':"up",'repo':"joliu/mysql_client",'imname':"hiwifi/client","dcport":"33332"}]
+    msg1 = [{'cmd':r'python3 /tmp/server+.py','equip':"xdlight1", 'log':"up",'repo':"xjhuang/light",'imname':"hiwifi/light","dcport":"33332"}]
 
     #:将json转化成可发送数据
     jmsg1 = json.dumps(msg1)
