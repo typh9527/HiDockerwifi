@@ -48,21 +48,32 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
             log_ans = True
             #:检查本地镜像库是否已经存在该镜像
             if not buildDock.checkim(imname):
-                #:下载镜像
-                if buildDock.download(repo) and log_ans:
-                    #:载入镜像
-                    if buildDock.load(repo):
-                        #:运行镜像
-                        flag = buildDock.run(imname,rec_equip,dcport,rec_cmd)
-                        #:判断运行是否成功
-                        if flag[0]:
-                            cmd_ans = True
-                        else:
-                            cmd_ans = False
+                if buildDock.pulldc(imname):
+                    flag = buildDock.run(imname,rec_equip,dcport,rec_cmd)
+                    if flag[0]:
+                        cmd_ans = True
                     else:
                         cmd_ans = False
                 else:
                     cmd_ans = False
+
+#以下为使用ftp下载的命令            
+#                #:下载镜像
+#                if buildDock.download(repo) and log_ans:
+#                    #:载入镜像
+#                    if buildDock.load(repo):
+#                        #:运行镜像
+#                        flag = buildDock.run(imname,rec_equip,dcport,rec_cmd)
+#                        #:判断运行是否成功
+#                        if flag[0]:
+#                            cmd_ans = True
+#                        else:
+#                            cmd_ans = False
+#                    else:
+#                        cmd_ans = False
+#                else:
+#                    cmd_ans = False
+
             else:
                 #:检查是否已经创建过应用
                 if buildDock.checkdc(rec_equip):
